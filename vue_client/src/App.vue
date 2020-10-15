@@ -1,32 +1,31 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div id="app" class='content'>
+    <Header :username='username'/>
+    <transition name="fade" mode='out-in'>
+      <router-view/>
+    </transition>
+    <Footer/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  name: 'App',
+  components: {
+    Header,
+    Footer
+  },
+  data () {
+    return {
+      username: 'User'
     }
   }
 }
+</script>
+
+<style lang="scss">
+@import "@/assets/scss/main";
 </style>

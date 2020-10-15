@@ -1,0 +1,151 @@
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 2fr 10fr 2fr;
+}
+.content{
+  height: 100%;
+}
+// &.router-link-exact-active
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 24px;
+}
+html, body {
+  min-height: 120vh;
+  height: 120vh;
+  scroll-behavior: smooth;
+}
+html::-webkit-scrollbar{
+  width: 0px;
+  height: 0px;
+}
+a:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+.header{
+  width: 100%;
+  height: 15vh;
+  min-height: 60px;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  .nav {
+    display: flex;
+    justify-content: space-around;
+  }
+  a{
+    text-decoration: none;
+    font-size: 24px;
+    color: #000;
+    font-weight: 300;
+    &.router-link-exact-active{
+      color: #5a6069;
+    }
+  }
+  a:hover{
+    text-decoration: underline;
+    transition: 0.2s;
+  }
+}
+.footer{
+  width: 100%;
+  height: 20vh;
+  min-height: 80px;
+  background-color: black;
+  opacity: 80%;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .25s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}
+.page{
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr 3fr 1fr;
+}
+.auth_box{
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  a{
+    transition: 0.3s;
+  }
+  a:hover{
+  text-decoration: underline;
+  }
+}
+.auth_form{
+  display: grid;
+  height: 80%;
+  width: 60%;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  input{
+    height: 45px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color: #eee;
+    text-align: center;
+  }
+  button{
+    height: 45px;
+    outline: none;
+    background: #fff;
+    color: #222;
+    border: 1px solid #222;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+  button:hover{
+    cursor: pointer;
+    background: #222;
+    color: #fff;
+  }
+  span{
+    font-size: 14px;
+  }
+}
+.posts_list {
+  grid-column: 2;
+  grid-row: 1/3;
+}
+.post_form{
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  a{
+    margin-left: 20px;
+  }
+}
+.post_input{
+  padding: 1% 5px;
+  height: 40px;
+  width: 80%;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-color: #eee;
+  word-wrap: word-wrap;
+  overflow: hidden;
+  resize: none;
+}
+textarea{
+  resize: none;
+}
