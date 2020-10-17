@@ -70,7 +70,7 @@ def create_post():
         return jsonify("We don't recognize you...(-_-)")
     else:
         data = request.get_json(force=True)
-        new_post = Post(body=data['body'], author_id=current_user.id)
+        new_post = Post(body=data['body'], author_id=current_user.id, pub_time=datetime.utcnow().strftime("%d/%m/%Y %H:%M"))
         if new_post != None:
             session.add(new_post)
             session.commit()
@@ -86,7 +86,7 @@ def get_posts():
     if current_user == None:
         return jsonify("Who you are?...(-_-)")
     else:
-        posts = session.query(Post).all()
+        posts = session.query(Post).order_by(Post.id.desc()).all()
         if posts == None:
             return jsonify(msg='(sounds of crickets)')
         else:

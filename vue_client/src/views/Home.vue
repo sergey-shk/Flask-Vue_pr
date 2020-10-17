@@ -1,19 +1,24 @@
 <template>
   <div class="page">
-    <div v-if='isAuth'>
-      <span>Join as {{ userdata.username }}</span><br>
-      <span>Id {{ userdata.id }}</span>
-    </div>
     <span>{{ msg }}</span>
     <div class="posts_list">
       <PostForm/>
       <br>
       <div class="post_item" v-for='post in posts' :key='post.id'>
-        <span>{{ post.authors_username }}</span>
-        <h2>{{ post.body }}</h2>
-        <span style='font-size: 16px;'>{{ post.liked_users.length }}</span>
-        <a v-if='post.author_id !== userdata.id' @click.prevent='like(post.id)'>Like</a>
-        <hr>
+        <div class="user_pic">
+        </div>
+        <div class="post_body">
+          <div class='row1'>
+            <a class='author'>{{ post.authors_username }}</a>
+            <span style='font-size: 18px;'>{{ post.pub_time }}</span>
+          </div>
+          <span class='post_text'>{{ post.body }}</span>
+          <div class="row1 low">
+            <a @click.prevent='like(post.id)'><div class='plus_btn'>+</div></a>
+            <span>{{ post.liked_users.length }}</span>
+            <a @click.prevent='like(post.id)'><div class='plus_btn'>-</div></a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

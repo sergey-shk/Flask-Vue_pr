@@ -11,13 +11,13 @@ export default {
     }
   },
   actions: {
-    createPost: ({ commit }, postdata) => {
+    createPost: ({ commit, dispatch }, postdata) => {
       axios.post('http://127.0.0.1:5000/api/posts/createpost', {
         body: postdata.body
       }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       }).then(response => (
-        console.log(response.data.msg)
+        dispatch('getPosts')
       ))
     },
     getPosts: ({ commit }) => {

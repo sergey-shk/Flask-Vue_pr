@@ -1,5 +1,5 @@
 
-from sqlalchemy import Table, Boolean, Column, Integer, String, MetaData, create_engine, UniqueConstraint, Date, ForeignKey
+from sqlalchemy import Table, Boolean, Column, Integer, String, MetaData, create_engine, UniqueConstraint, DateTime, ForeignKey, Date
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm.session import sessionmaker
@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 
 
-engine = create_engine('postgresql://postgres:admin@localhost/flask_app_db02')
+engine = create_engine('postgresql://postgres:admin@localhost/flask_app_db03')
 if not database_exists(engine.url):
     create_database(engine.url)
 db = declarative_base()
@@ -52,14 +52,16 @@ class Post(db):
     body = Column(String)
     author_id = Column(Integer, ForeignKey('users.id'))
     liked_users = relationship('User', secondary=likes_table, back_populates='liked_posts')
+    pub_time = Column(String, default=datetime.utcnow().strftime("%d/%m/%Y %H:%M"))
 
     def serialize(self):
         return {
             'id': self.id,
             'body': self.body,
             'author_id': self.author_id,
-            'liked_users': [self.liked_users],
-            'authors_username': session.query(User).filter_by(id=self.author_id).first().username
+            'liked_users': [user.username for user in self.liked_users],
+            'authors_username': session.query(User).filter_by(id=self.author_id).first().username,
+            'pub_time': self.pub_time
         }
 
 
